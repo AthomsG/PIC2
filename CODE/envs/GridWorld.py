@@ -60,16 +60,16 @@ def plot_policy(q_values):
             # Find indices of all occurrences of the maximum value in the matrix
             indices = np.argwhere(state_q_values == max_value)
             # Choose random action. This is to prevent bias when multiple actions have the same q value
-            action = np.random.choice(np.ravel(indices))
             if len(indices)>1: stochastic_policy=True
-            if action == 0:  # up
-                ax.arrow(j, n_rows-i-1, 0, 0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
-            elif action == 1:  # down
-                ax.arrow(j, n_rows-i-1, 0, -0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
-            elif action == 2:  # left
-                ax.arrow(j, n_rows-i-1, -0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
-            elif action == 3:  # right
-                ax.arrow(j, n_rows-i-1, 0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
+            for action in indices:
+                if action == 0:  # up
+                    ax.arrow(j, n_rows-i-1, 0, 0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
+                elif action == 1:  # down
+                    ax.arrow(j, n_rows-i-1, 0, -0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
+                elif action == 2:  # left
+                    ax.arrow(j, n_rows-i-1, -0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
+                elif action == 3:  # right
+                    ax.arrow(j, n_rows-i-1, 0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
                 
     # set axis labels and limits
     ax.set_xlim([-0.5, n_cols-0.5])

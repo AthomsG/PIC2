@@ -8,7 +8,7 @@ from envs.GridWorld import GridWorld, plot_policy
 from algorithms.temporal_difference import temporal_difference
 
 epsilon = 0.8
-episodes= 100000
+episodes= 1000
 gamma   = 1.0
 alpha   = 0.01
 
