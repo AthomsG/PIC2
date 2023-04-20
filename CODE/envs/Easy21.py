@@ -31,19 +31,19 @@ class Easy21:
 
         elif action == 1:  # "stick" action
             self.terminate = True
+            dealer_sum = self.dealer_card
 
-            while self.dealer_card < 17: # Dealer hits until scoring 17
+            while dealer_sum < 17: # Dealer hits until scoring 17
                 card = self.draw_card()
-                self.dealer_card += card
+                dealer_sum += card
 
-            if self.dealer_card > 21 or self.dealer_card < 1:
-                self.dealer_card -= card # We don't consider these 'out of bound' states
+            if dealer_sum > 21 or dealer_sum < 1:
                 #print('dealer went bust')
                 return (self.dealer_card, self.player_sum), 1, self.terminate  # Dealer busts, episode terminates with +1 reward
             else:
-                if self.dealer_card < self.player_sum:
+                if dealer_sum < self.player_sum:
                     return (self.dealer_card, self.player_sum), 1, self.terminate  # Player wins, episode terminates with +1 reward
-                elif self.dealer_card > self.player_sum:
+                elif dealer_sum > self.player_sum:
                     return (self.dealer_card, self.player_sum), -1, self.terminate  # Dealer wins, episode terminates with -1 reward
                 else:
                     return (self.dealer_card, self.player_sum), 0, self.terminate  # Draw, episode terminates with 0 reward
