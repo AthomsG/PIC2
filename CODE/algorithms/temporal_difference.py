@@ -6,7 +6,7 @@ sys.path.extend(['..'])
 
 from agents.TemporalDifferenceAgent import TDAgent
 
-#Sarsa algorithm i
+#Sarsa algorithm
 def temporal_difference(env, episodes, tabular_dim, alpha=0.1, epsilon=0.1, gamma=1.0, map_state=None):
     n_actions = tabular_dim[0]
     agent = TDAgent(tabular_dim, alpha, epsilon, gamma, map_state)
@@ -22,7 +22,7 @@ def temporal_difference(env, episodes, tabular_dim, alpha=0.1, epsilon=0.1, gamm
             next_state, reward, terminate = env.step(action)
             next_action = agent.choose_action(next_state, decay_factor=decay_factor)
 
-            agent.update(state, action, reward, next_state)
+            agent.update(state, action, reward, next_state) #I SHOULD INCLUDE NEXT_ACTION. IT IS BEING CHOSEN GREEDILY
 
             state = next_state
             action = next_action
