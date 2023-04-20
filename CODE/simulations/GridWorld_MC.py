@@ -4,12 +4,12 @@ import numpy as np
 import sys
 sys.path.extend(['.', '..'])
 
-from envs.GridWorld import GridWorld
+from envs.GridWorld import GridWorld, plot_policy
 from algorithms.monte_carlo import monte_carlo
 
 epsilon =1
-episodes=10000
-gamma   =0.8
+episodes=50000
+gamma   =0.9
 
 grid_size=10
 
@@ -24,3 +24,5 @@ q_values = monte_carlo(env=env, episodes=episodes, tabular_dim=tabular_dim, epsi
 v_values = np.mean(q_values, axis=0)
 plt.imshow(v_values, cmap='gray')
 plt.show()
+
+plot_policy(q_values)

@@ -7,14 +7,14 @@ sys.path.extend(['.', '..'])
 from envs.GridWorld import GridWorld, plot_policy
 from algorithms.temporal_difference import temporal_difference
 
-epsilon =1
-episodes=100000
-gamma   =1
+epsilon =0.2
+episodes=1000
+gamma   =0.95
 
-grid_size=5
+grid_size=(1, 200)
 
 #GridWorld
-tabular_dim = (4, grid_size, grid_size)  # Action Set Cardinality, Dealer's card (1-10), Player's sum (1-21);
+tabular_dim = (4, grid_size[0], grid_size[1])  # Action Set Cardinality, Dealer's card (1-10), Player's sum (1-21);
 
 env = GridWorld([tabular_dim[1], tabular_dim[2]])
 

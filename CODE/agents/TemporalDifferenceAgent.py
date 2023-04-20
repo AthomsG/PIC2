@@ -27,7 +27,7 @@ class TDAgent:
 
             # Find indices of all occurrences of the maximum value in the matrix
             indices = np.argwhere(q_values == max_value)
-            # Choose random action
+            # Choose random action. This is to prevent bias when multiple actions have the same q value
             action = np.random.choice(np.ravel(indices))
         return action
 
