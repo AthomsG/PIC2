@@ -8,7 +8,7 @@ from envs.GridWorld import GridWorld, plot_policy
 from algorithms.monte_carlo import monte_carlo
 
 epsilon =1
-episodes=50000
+episodes=500
 gamma   =0.9
 
 grid_size=10

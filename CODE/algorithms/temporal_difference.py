@@ -15,9 +15,12 @@ def temporal_difference(env, episodes, tabular_dim, alpha=0.1, epsilon=0.1, gamm
         state = env.start()
         action = agent.choose_action(state)
 
+        # GLIE
+        decay_factor=1-(episode/episodes) # MAYBE DEFINE AS A FUNCTION INPUT
+
         while not env.terminate:
             next_state, reward, terminate = env.step(action)
-            next_action = agent.choose_action(next_state)
+            next_action = agent.choose_action(next_state, decay_factor=decay_factor)
 
             agent.update(state, action, reward, next_state)
 

@@ -37,7 +37,9 @@ def plot_env(env_draw, episode=None):
     # Show the plot
     plt.show()
 
+
 def plot_policy(q_values):
+    stochastic_policy=False
     n_actions, n_rows, n_cols = q_values.shape
     fig, ax = plt.subplots()
 
@@ -49,7 +51,17 @@ def plot_policy(q_values):
     # plot arrows for each state
     for i in range(n_rows):
         for j in range(n_cols):
-            action = np.argmax(q_values[:, i, j])
+
+            if i == n_rows-1 and j == n_cols-1: break # We don't care about the policy in the terminal state.
+
+            state_q_values=q_values[:, i, j]
+            max_value = np.max(state_q_values)
+
+            # Find indices of all occurrences of the maximum value in the matrix
+            indices = np.argwhere(state_q_values == max_value)
+            # Choose random action. This is to prevent bias when multiple actions have the same q value
+            action = np.random.choice(np.ravel(indices))
+            if len(indices)>1: stochastic_policy=True
             if action == 0:  # up
                 ax.arrow(j, n_rows-i-1, 0, 0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
             elif action == 1:  # down
@@ -64,6 +76,10 @@ def plot_policy(q_values):
     ax.set_ylim([-0.5, n_rows-0.5])
     ax.set_aspect('equal', adjustable='box')
     ax.axis('off')
+    if stochastic_policy:
+        ax.set_title('Stochastic Policy')
+    else:
+        ax.set_title('Deterministic Policy')
     
     plt.show()
 
