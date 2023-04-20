@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from matplotlib.patches import Rectangle
 #
 #                       AUXILIARY FUNCTIONS
 #
@@ -35,6 +35,36 @@ def plot_env(env_draw, episode=None):
     if(episode):
         plt.savefig(str(episode)+'.png')
     # Show the plot
+    plt.show()
+
+def plot_policy(q_values):
+    n_actions, n_rows, n_cols = q_values.shape
+    fig, ax = plt.subplots()
+
+    # plot squares for each state
+    for i in range(n_rows):
+        for j in range(n_cols):
+            ax.add_patch(Rectangle((j-0.5, n_rows-i-1-0.5), 1, 1, fill=False, linewidth=1))
+
+    # plot arrows for each state
+    for i in range(n_rows):
+        for j in range(n_cols):
+            action = np.argmax(q_values[:, i, j])
+            if action == 0:  # up
+                ax.arrow(j, n_rows-i-1, 0, 0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
+            elif action == 1:  # down
+                ax.arrow(j, n_rows-i-1, 0, -0.4, head_width=0.1, head_length=0.1, fc='k', ec='k')
+            elif action == 2:  # left
+                ax.arrow(j, n_rows-i-1, -0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
+            elif action == 3:  # right
+                ax.arrow(j, n_rows-i-1, 0.4, 0, head_width=0.1, head_length=0.1, fc='k', ec='k')
+                
+    # set axis labels and limits
+    ax.set_xlim([-0.5, n_cols-0.5])
+    ax.set_ylim([-0.5, n_rows-0.5])
+    ax.set_aspect('equal', adjustable='box')
+    ax.axis('off')
+    
     plt.show()
 
 #
