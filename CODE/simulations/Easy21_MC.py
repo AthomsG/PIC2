@@ -18,10 +18,15 @@ gamma   =1.0 #Uniscounted as all episodes contain terminal state
 
 # action-state value function
 env=Easy21()
-q_values = monte_carlo(env=env, episodes=episodes, epsilon=epsilon, gamma=gamma, tabular_dim=(2, 10, 21), map_state=map_state)
+q_values = monte_carlo(env=env, 
+                       episodes=episodes, 
+                       epsilon=epsilon, 
+                       gamma=gamma, 
+                       tabular_dim=(2, 10, 21), 
+                       map_state=map_state)
 
 # state value function
-v_values = np.maximum(q_values[0], q_values[1])*(1-epsilon)+np.minimum(q_values[0], q_values[1])*(epsilon)
+v_values = np.maximum(q_values[0], q_values[1])
 
 # state value function plot
 m, n = v_values.shape
