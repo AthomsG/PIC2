@@ -4,7 +4,7 @@ from agents.TabularAgent import TabularAgent
 # Implementation of First-Visit Monte Carlo Method Agent
 class MonteCarloAgent(TabularAgent):
     def __init__(self, tabular_dim, epsilon=0.1, gamma=1.0, map_state=None):
-        super().__init__(tabular_dim, epsilon, gamma, map_state)
+        super().__init__(tabular_dim=tabular_dim, epsilon=epsilon, gamma=gamma, map_state=map_state)
         self.n_visits = np.zeros(tabular_dim)
 
     def update(self, episode_states, episode_actions, episode_rewards):
