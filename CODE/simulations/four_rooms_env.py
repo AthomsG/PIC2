@@ -14,9 +14,9 @@ grid_size=11
 env=FourRoomEnv(grid_size)
 env.plot()
 
-epsilon =1
-episodes=10000
-gamma   =1
+epsilon =0.5
+episodes=50000
+gamma   =1.0
 
 #GridWorld
 tabular_dim = (4, grid_size, grid_size)  # Action Set Cardinality, Dealer's card (1-10), Player's sum (1-21);
